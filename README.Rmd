@@ -1,0 +1,73 @@
+---
+output:
+  md_document:
+    variant: markdown_github
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
+```
+
+`safebrowsing` : retrieve ASN & URL info from Google Safe Browsing
+
+If you're not familiar with Google's "Safe Browing" "service", you should probably [go here](https://www.google.com/transparencyreport/safebrowsing/?hl=en) and read up on it before using this package.
+
+Note also that this is package relies on undocumented APIs and could break if Google changes how they call the underlying XHR requests.
+
+The following functions are implemented:
+
+- `gsb_as_ts`:	Retrieve attack/compromised host time series info for an AS
+- `gsb_asinfo`:	Retrive AS info from Google SafeBrowsing
+- `gsb_site_status`:	Retrive URL "site status"
+
+### News
+
+- Version  released
+
+### Installation
+
+```{r eval=FALSE}
+devtools::install_github("hrbrmstr/safebrowsing")
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, error=FALSE}
+options(width=120)
+```
+
+### Usage
+
+```{r}
+library(safebrowsing)
+
+# current verison
+packageVersion("safebrowsing")
+
+gsb_site_status(c("http://fgcdiesel.cl/encrypted.exe", 
+                  "http://rud.is/", "http://dds.ec/"))
+
+gsb_asinfo("largest", 7)
+
+gsb_as_ts("10439")
+```
+
+### Test Results
+
+```{r}
+library(safebrowsing)
+library(testthat)
+
+date()
+
+test_dir("tests/")
+```
+
+### Code of Conduct
+
+Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). 
+By participating in this project you agree to abide by its terms.
